@@ -12,6 +12,7 @@ Create a docker image OR extra points for a serverless/lambda solution that host
 - On page load
     - Create random VIN
         - must decode to a real make/model/year and checksum
+    - Button to create custom VIN
     - Create QR code from VIN
     - Present QR code and VIN on page
 ### SECONDARY GOALS (as options):
