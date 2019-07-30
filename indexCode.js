@@ -18,67 +18,61 @@ var app = new function() {
 	
 	function redrawQrCode() {
 		// Show/hide rows based on bitmap/vector image output
-		var bitmapOutput = document.getElementById("output-format-bitmap").checked;
-		var scaleRow = document.getElementById("scale-row");
-		var svgXmlRow = document.getElementById("svg-xml-row");
-		if (bitmapOutput) {
-			scaleRow.style.removeProperty("display");
-			svgXmlRow.style.display = "none";
+
+		
+        var bitmapOutput = true; // Set bitmap as the default, Vector image is the other option
+        if (bitmapOutput) {
 		} else {
 			scaleRow.style.display = "none";
-			svgXmlRow.style.removeProperty("display");
 		}
-		var svgXml = document.getElementById("svg-xml-output");
-		svgXml.value = "";
 		
+
 		// Reset output images in case of early termination
 		var canvas = document.getElementById("qrcode-canvas");
-		var svg = document.getElementById("qrcode-svg");
-		canvas.style.display = "none";
-		svg.style.display = "none";
 		
 		// Returns a QrCode.Ecc object based on the radio buttons in the HTML form.
 		function getInputErrorCorrectionLevel() {
-			if (document.getElementById("errcorlvl-medium").checked)
-				return qrcodegen.QrCode.Ecc.MEDIUM;
-			else if (document.getElementById("errcorlvl-quartile").checked)
-				return qrcodegen.QrCode.Ecc.QUARTILE;
-			else if (document.getElementById("errcorlvl-high").checked)
-				return qrcodegen.QrCode.Ecc.HIGH;
-			else  // In case no radio button is depressed
-				return qrcodegen.QrCode.Ecc.LOW;
+            return qrcodegen.QrCode.Ecc.MEDIUM;
 		}
 		
-		// Get form inputs and compute QR Code
-		
+        // Get form inputs and compute QR Code
         var ecl = getInputErrorCorrectionLevel();
 
-//for testing		var text = document.getElementById("text-input").value;
+//placeholder for text
+        //var text = document.getElementById("text-input").value;
         var text = "My Test String";
         
-		var segs = qrcodegen.QrSegment.makeSegments(text);
-		var minVer = parseInt(document.getElementById("version-min-input").value, 10);
-		var maxVer = parseInt(document.getElementById("version-max-input").value, 10);
-		var mask = parseInt(document.getElementById("mask-input").value, 10);
-		var boostEcc = document.getElementById("boost-ecc-input").checked;
-		var qr = qrcodegen.QrCode.encodeSegments(segs, ecl, minVer, maxVer, mask, boostEcc);
+        var segs = qrcodegen.QrSegment.makeSegments(text);
+        
+// sets default for version		
+        var minVer = 1
+        var maxVer = 40
+// sets default for mask. "-1" is automatic, 0-7 is manual control for mask pattern        
+		var mask = -1
+
+// sets defualt status of boosting the ECC to TRUE
+        var boostEcc = true
+		
+        var qr = qrcodegen.QrCode.encodeSegments(segs, ecl, minVer, maxVer, mask, boostEcc);
 		
 		// Draw image output
-		var border = parseInt(document.getElementById("border-input").value, 10);
-		if (border < 0 || border > 100)
+		//var border = parseInt(document.getElementById("border-input").value, 10);
+// set default border size		
+        var border = (3)
+                
+        if (border < 0 || border > 100)
 			return;
 		if (bitmapOutput) {
-			var scale = parseInt(document.getElementById("scale-input").value, 10);
-			if (scale <= 0 || scale > 30)
+// !!! set default scale (will be set with slider later )            
+			//var scale = parseInt(document.getElementById("scale-input").value, 10);
+			var scale = (10)
+            
+            if (scale <= 0 || scale > 30)
 				return;
 			qr.drawCanvas(scale, border, canvas);
 			canvas.style.removeProperty("display");
 		} else {
-			var code = qr.toSvgString(border);
-			svg.setAttribute("viewBox", / viewBox="([^"]*)"/.exec(code)[1]);
-			svg.querySelector("path").setAttribute("d", / d="([^"]*)"/.exec(code)[1]);
-			svg.style.removeProperty("display");
-			svgXml.value = qr.toSvgString(border);
+//            Does nothing
 		}
 		
 		// Returns a string to describe the given list of segments.
@@ -114,21 +108,12 @@ var app = new function() {
 			}
 			return result;
 		}
-		
-		// Show the QR Code symbol's statistics as a string
-		var stats = "QR Code version = " + qr.version + ", ";
-		stats += "mask pattern = " + qr.mask + ", ";
-		stats += "character count = " + countUnicodeChars(text) + ",\n";
-		stats += "encoding mode = " + describeSegments(segs) + ", ";
-		stats += "error correction = level " + "LMQH".charAt(qr.errorCorrectionLevel.ordinal) + ", ";
-		stats += "data bits = " + qrcodegen.QrSegment.getTotalBits(segs, qr.version) + ".";
-		document.getElementById("statistics-output").textContent = stats;
 	}
 	
 	
 	this.handleVersionMinMax = function(which) {
-		var minElem = document.getElementById("version-min-input");
-		var maxElem = document.getElementById("version-max-input");
+        var minElem = 1
+        var maxElem = 40
 		var minVal = parseInt(minElem.value, 10);
 		var maxVal = parseInt(maxElem.value, 10);
 		minVal = Math.max(Math.min(minVal, qrcodegen.QrCode.MAX_VERSION), qrcodegen.QrCode.MIN_VERSION);
