@@ -20,4 +20,5 @@ Create a docker image OR extra points for a serverless/lambda solution that host
 - Bit encoded VIN
 - If both settings are applied, the VIN in the url should be encoded
 - Save settings
+- Barcode Fade in animation
 - Other???
