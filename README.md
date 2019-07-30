@@ -1,12 +1,14 @@
 # ShUrl
 ## Page Elements
-* Preset Buttons
-* Generate Button
-* Print Button
-* Display the generated vin and barcode
-* Display the generated url
+* [ ] Preset Buttons
+* [ ] Generate Button
+* [ ] Print Button
+* [ ] Display the generated vin and barcode
+* [ ] Display the generated url
 ## Backend stuff
-* Shorten URL
+* [ ] Shorten URL
+* [ ] Add a Checksum method to validate custom VINs
+* [ ] Bit encoding
 ## PRIMARY GOAL:
 Create a docker image OR extra points for a serverless/lambda solution that hosts a website meeting the following requirements
 - On page load
