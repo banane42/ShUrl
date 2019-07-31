@@ -2,39 +2,125 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>QR Code generator library demo (JavaScript)</title>
-	<style type="text/css">
-	html {
-		font-family: sans-serif;
-	}
-	td {
-		vertical-align: top;
-		padding-top: 0.2em;
-		padding-bottom: 0.2em;
-	}
-	td:first-child {
-		white-space: pre;
-		padding-right: 0.5em;
-	}
-	input[type=radio], input[type=checkbox] {
-		margin: 0em;
-		padding: 0em;
-	}
-	input[type=radio] + label, input[type=checkbox] + label {
-		margin-right: 0.8em;
-		padding-left: 0.2em;
-	}
-	</style>
-</head>
+	<title>QuRl</title>
+    <style>
+            
+         .outer {
+/*            text-align:center;*/
+            width: 100%;
+/*            background-color:darkgrey;*/
+        }
+        
+        .blockLeft {
+            width: 300px;
+            height: 350px;
+            border: 2px solid black;
+            display: inline-block;
+            margin: .2rem;
+            background-color: slategrey;
+            margin-right: 4%;
+            margin-left: 5%
+        }
 
-<body>
+        .blockCenter {
+            width: 400px;
+            height: 350px;
+            border: 2px solid black;
+/*            display: inline-block;*/
+            margin: .2rem;
+            background-color: slategrey;
+            margin-right: 4%;
+            float: left;
+        }
+        
+        .blockRight {
+            width: 350px;
+            height: 300px;
+            border: 2px solid black;
+            display: inline-block;
+            margin: .2rem;
+            background-color: slategrey;
+        }
+        
+        
+    </style>
+
+</head>    
+    
+    
+<body style="background-color: dimgray">
+
+    <div class="blockCenter" style="margin-left: 3%">one</div>
+    <div class="blockCenter">two
+<!--
+        <div style="margin: 35px">
+            <canvas id="qrcode-canvas"></canvas>    
+        </div>
+-->
+    </div>
+    <div class="blockCenter">three</div>
+    
+    
+    
+    <!--
+<header>
+  <h2 style="text-align: center; font-family:monospace; font-size: 35px">QuRl QR/url Tool</h2>
+</header>
 
     <div>
-        <canvas id="qrcode-canvas" style="padding:1em; background-color:#E8E8E8"></canvas>
-    </div>    
+    
+        <div id="first">
+        </div>
+        
+        <div id="second">
+            <canvas id="qrcode-canvas" style="padding:1em; background-color:#E8E8E8" style="align-items: flex-end"></canvas>
+        </div>
+        
+        <div id="third">
+        
+        </div>
+        
+        <div id="clear"></div>
+        
+    </div>
+<footer>
+  <p>Footer</p>
+</footer>    
+-->
     
 <script type="application/javascript" src="createQR.js"></script>
 <script type="application/javascript" src="indexCode.js"></script>
 
 </body>
+
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
