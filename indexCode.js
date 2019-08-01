@@ -1,5 +1,8 @@
 "use strict";
 
+//import {validateVin} from './vin-generator.js';
+//import * as lib from './vin-generator.js';
+//var vinGenerate = require('./vin-generator.js');
 
 var app = new function() {
 	
@@ -12,10 +15,19 @@ var app = new function() {
 		elems = document.querySelectorAll("input[type=radio], input[type=checkbox]");
 		for (var i = 0; i < elems.length; i++)
 			elems[i].onchange = redrawQrCode;
+        
+//         document.getElementById("vinInput").onkeyup = testVinValidation;
+        
 		redrawQrCode();
 	}
 	
-	
+	function testVinValidation() {
+        
+        var input = document.getElementById("vinInput").value;
+        console.log(validateVin(input));
+        
+    }
+    
 	function redrawQrCode() {
 		// Show/hide rows based on bitmap/vector image output
 
