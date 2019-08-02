@@ -3,161 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>QuRl</title>
-    <style>
-            
-         .outer {
-/*            text-align:center;*/
-            width: 100%;
-/*            background-color:darkgrey;*/
-        }
-        
-        .blockLeft {
-            width: 250px;
-            height: 300px;
-            border: 2px solid black;
-            display: inline-block;
-            margin: .2rem;
-            background-color: slategrey;
-            margin-right: 4%;
-            margin-left: 1%;
-            float: left;
-            border-radius: 8px;
-        }
-
-        .blockCenter {
-            width: 350px;
-            height: 350px;
-            border: 2px solid black;
-/*            display: inline-block;*/
-            margin: .2rem;
-            background-color: slategrey;
-            margin-right: 4%;
-            float: left;
-            border-radius: 8px;
-        }
-        
-        .blockRight {
-            width: 300px;
-            height: 200px;
-            border: 2px solid black;
-            display: inline-block;
-            margin: .2rem;
-            background-color: slategrey;
-            float: left;
-            border-radius: 8px;
-        }
-        
-        .blockMidlCenter {
-            width: 350px;
-            height: 50px;
-            border: 2px solid black;
-/*            display: inline-block;*/
-            margin: .2rem;
-            background-color: slategrey;
-            margin-right: 4%;
-/*            float: left;*/
-            border-radius: 8px;
-        }
-        
-        .button {
-            -webkit-transition-duration: 0.1s; /* Safari */
-            transition-duration: .4s;
-            background-color: forestgreen;
-            text-align: center;
-            text-decoration: none;
-            cursor: pointer;
-            height: 45px;
-            width: 150px;
-            margin-left: ;
-            margin-top: 25px;
-            margin-left: 45px;
-            border-radius: 6px;
-            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-            border: 1px solid black;
-        }
-
-        .button:hover {
-          background-color: forestgreen; /* Green */
-          color: black;
-          box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-        }   
-        
-        .button:focus {
-            transform: translateY(4px);
-            background-color: greenyellow;
-        }
-        
-        .LwrButton {
-            -webkit-transition-duration: 0.1s; /* Safari */
-            transition-duration: .4s;
-            background-color: forestgreen;
-            height: 45px;
-            width: 150px;
-            border-radius: 6px;
-            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-            border: 1px solid black;
-        }
-        
-        .LwrButton:hover {
-          background-color: forestgreen; /* Green */
-          color: black;
-          box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-        }
-        
-        .LwrButton:active {
-            background-color: greenyellow;
-            transform: translateY(4px);
-        }
-        
-        .slidecontainer {
-          width: 100%;
-        }
-
-        .slider {
-          -webkit-appearance: none;
-          width: 300px;
-          height: 25px;
-          background-color: slategray;
-          border-color: black;
-          border: 2px solid black;
-          outline: none;
-          opacity: 0.7;
-          -webkit-transition: .2s;
-          transition: opacity .2s;
-          border-radius: 15px;
-        }
-
-        .slider:hover {
-          opacity: 1;
-        }
-
-        .slider::-webkit-slider-thumb {
-          -webkit-appearance: none;
-          appearance: none;
-          width: 25px;
-          height: 25px;
-          background-color: forestgreen;
-          border-color: black;
-          border: 1px solid black;
-          cursor: pointer;
-          border-radius: 20px;
-        }
-
-        .slider::-moz-range-thumb {
-          width: 25px;
-          height: 25px;
-          background: #4CAF50;
-          cursor: pointer;
-        }
-        
-        
-        *:focus {
-            outline: none;
-        }
-        
-        
-    </style>
-
+    <link rel="stylesheet" href="style.css">
+    
 </head>    
     
     
@@ -171,57 +18,63 @@
     
     <div class="blockLeft" style="vertical-align: middle; margin-top: ">
         <div style="margin-top: -5px">
-            <button class="button" type="button">VIN</button>
-            <button class="button" type="button">URL</button>
-            <button class="button" type="button">Encode</button>
-            <button class="button" type="button">Short</button>
+            <button id="vinBTN" class="button" type="button" onclick="wrapVIN()">VIN</button>
+            <button class="button" type="button" onclick="wrapURL()">URL</button>
+            <button class="badButton" type="button">Encode</button>
+            <button class="badButton" type="button">Short</button>
         </div>
     </div>
-    
     <div class="blockCenter">
-        <div style="margin: 40px">   
+        <div style="height: 350px;width: 350px; display: flex; align-items: center; justify-content: center; ">   
             <canvas style="box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);" id="qrcode-canvas"></canvas>    
         </div>
     </div>
     <div class="blockRight">
         <div style="text-align: center">
-            <p style="margin-top: 30%;" id="QRcontents">QR output here</p>
+            <p style="font-size: 20px">QR Contents</p><p style="margin-top: 50px;" id="QRcontents"></p>
         </div>
     </div>
 </div>
     
-<div style="display: flex; align-items: center; justify-content: center; margin-top: 10px; width: 1000px; margin-left: 15%; ">
+<div id="randomVINdiv" style="display: flex; align-items: center; justify-content: center; margin-top: 10px; width: 1000px; margin-left: 15%; display: flex">
     <div class="blockMidlCenter" style="text-align: center">
         <div style="margin-top: 4.5%">
-            <text>VIN: </text><text>THIS IS THE VIN</text>
+            <text>VIN: </text><text id="randomVIN">Presss New VIN or Custom VIN</text>
+        </div>
+   </div>
+</div>
+
+<div id="customVINdiv" style="display: flex; align-items: center; justify-content: center; margin-top: 10px; width: 1000px; margin-left: 14%; display: none">
+    <div class="blockMidlCenter" style="text-align: center">
+        <div style="margin-top: 4.5%">
+            <text>VIN </text><input type="text" name="VINinput" id="VINinput" style="background-color: slategray; border-color: black; width: 250px; height: 20px; margin-top: -5px; font-size: 20px">
         </div>
     </div>
+    <button type="button" class="enterButton" onclick="customVIN()">Submit</button>
 </div>
     
 <div style="display: flex; align-items: center; justify-content: center; width: 1000px; margin-left: 15%; margin-top: 5px; ">
     <div style="margin-top: 5px; margin-left: -30px ">
-        <button class="LwrButton" type="button"><text style="font-size: 15px">Custom VIN</text></button>
-        <button class="LwrButton" type="button" style="margin-left: 5px"><text style="font-size: 15px">New VIN</text></button>
-        <button class="LwrButton" type="button" style="margin-left: 5px"><text style="font-size: 15px">Print QR</text></button>
+        <button class="LwrButton" type="button"><text style="font-size: 15px" onclick="toggleCustomVIN(); customVIN()">Custom VIN</text></button>
+        <button class="LwrButton" type="button" style="margin-left: 5px"><text onclick="toggleCustomVINoff(); HTTPrequest()" style="font-size: 15px">New VIN</text></button>
+        <button class="LwrButton" type="button" style="margin-left: 5px" onclick="PrintImage()"><text style="font-size: 15px">Print QR</text></button>
     </div>    
 </div>
     
 <div style="display: flex; align-items: center; justify-content: center; width: 1000px; margin-left: 14%; margin-top: 15px; ">
     <div class="slidecontainer" style="text-align: center">
-        <text style="font-size: 20px; font-weight: bold;">QR Size:</text>
+        <text style="font-size: 20px; font-weight: bold;">QR Size</text>
         <br>
-        <input type="range" min="1" max="3" value="2" class="slider" id="myRange">
+        <input type="range" min="1" max="3" value="2" class="slider" id="sizeSlider">
         <br>
         <text style="margin-right: 90px">Small</text><text style="margin-right: 90px">Regular</text><text>Large</text>
+        <br>
+        <button style="margin-top: 10px" class="LwrButton" type="button"><text style="font-size: 15px" onclick="redrawQrCode()">Update Size</text></button>
     </div>
 </div>
     
-    
-    
 <script type="application/javascript" src="createQR.js"></script>
 <script type="application/javascript" src="indexCode.js"></script>
-<script type="application/javascript" src="vin-generator.js"></script>
-
     
 </body>
 
